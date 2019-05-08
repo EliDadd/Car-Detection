@@ -1,0 +1,12 @@
+Use the following command for all sample images. aka change Blk1 to Blk1-5, Blu1-5, Red1-5, Yel1-5
+
+for each iteration of the command, use a different rngseed value
+
+opencv_createsamples -img p/Blk1.jpg -bg n/negatives.txt -info p/Blk1.txt -num 128 -maxxangle 0.0 -maxyangle 0.0 -maxzangle 0.3 -bgcolor 255 -bgthresh 8 -w 48 -h 48 -rngseed 11159
+
+Edit the names of the files to be samples_01(1-128), samples_02(1-128) ...
+
+opencv_createsamples -info p/positives.txt -bg n/negatives.txt -vec samples.vec -num 2560 -w 48 -h 48
+
+
+opencv_traincascade -data C:\Users\dadded1\Pictures\machinelearning -vec samples.vec -bg n/negatives.txt -numPos 2304 -numNeg 1637 -numStages 17 -precalcValBufSize 1024 -precalcIdxBufSize 1024 -featureType HAAR -minHitRate 0.995 -maxFalseAlarmRate 0.5 -w 48 -h 48
